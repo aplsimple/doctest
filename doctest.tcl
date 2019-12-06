@@ -360,6 +360,7 @@ proc doctest::test_blocks {blocks safe verbose} {
 proc doctest::init {args} {
 
   variable options
+  variable TEST_COMMAND
   array set options {fn "" cnt {} -s 1 -v 1 -b {}}
   if {[llength $args] == 0} exit_on_error
   set off 0
@@ -385,8 +386,24 @@ proc doctest::init {args} {
   if {[catch {set ch [open $options(fn)]}]} {
     exit_on_error "\"$options(fn)\" not open"
   }
-  set options(cnt) [split [read $ch] \n]
+  set cnt [split [read $ch] \n]
   close $ch
+  # source all tests (by #% source ...)
+  set options(cnt) {}
+  foreach line $cnt {
+    set foundptn [regexp -nocase -inline \
+      "^\\s*$TEST_COMMAND\\s+SOURCE\\s+" $line]
+    if {[set sl [string length $foundptn]]} {
+      set fn [string trim [string range $line $sl-2 end]]
+      if {[catch {set ch [open $fn]}]} {
+        error "PWD: [pwd]\n\"$fn\" not open by $line"
+      }
+      foreach l [split [read $ch] \n] { lappend options(cnt) $l }
+      close $ch
+    } else {
+      lappend options(cnt) $line
+    }
+  }
 }
 
 ###################################################################

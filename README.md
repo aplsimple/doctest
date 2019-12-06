@@ -20,6 +20,7 @@ The features of this doctest:
  - the doctesting can be performed in safe/unsafe interpreter
  - the outputs modes are verbose, short or silent
  - only 'silent' output mode means 'hide OK, show FAILED if any'
+ - large doctests can be sourced from files
 
 
 # How to do this?
@@ -129,6 +130,12 @@ Run the doctest on this text to see how it works.
 This thing might be helpful, namely: the doctest's usage isn't restricted with a code. A data file allowing #- or multi-line comments, might include the doctest strings for testing its contents, e.g. through something like:
 
     #% exec tclsh module.tcl this_datafile.txt
+
+If a doctest body is large, it can be moved to a separate file to be sourced with a comment:
+
+    #% source testedfile.test
+
+where *source* may be of any case (Source, SOURCE etc.), *testedfile.test* contains the doctest body. Thus we don't clutter the code with the doctest body. See e.g. *obbit.tcl* and *tests/obbit_1.test* in [pave](https://github.com/aplsimple/pave).
 
 
 # Usage
