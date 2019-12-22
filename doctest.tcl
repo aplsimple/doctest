@@ -178,10 +178,24 @@ proc doctest::get_test_blocks {} {
 ###################################################################
 # Get line of command or command's waited result
 
-proc doctest::get_line {type i} {
+proc doctest::get_line {type i prevcontinuedName} {
 
+  upvar $prevcontinuedName prevcontinued
   variable NOTHING
+  variable TEST_RESULT
   set st [string trimleft [get_line_contents $i]]
+  set st [get_line_contents $i]
+  set strimmed [string trimleft $st]
+  set tpos [string first $type $strimmed]
+  if {!$prevcontinued || $tpos == 0} {
+    set st $strimmed
+  } else {
+    set st "$type $st"    ;# continuing from previous line
+  }
+  set prevcontinued [expr {[string index $st end] eq "\\"}]
+  if {$prevcontinued && $type eq $TEST_RESULT} {
+    set st [string range $st 0 end-1]
+  }
   if {[set i [string first $type $st]] == 0} {
     return [string range $st [expr {[string length $type]+1}] end]
   }
@@ -204,8 +218,9 @@ proc doctest::get_com_res {type i1 i2} {
   variable NOTHING
   variable TEST_COMMAND
   set comres $NOTHING
+  set prevcontinued 0
   for {set i $i1; set res ""} {$i <= $i2} {incr i} {
-    set line [string trim [get_line $type $i] " "]
+    set line [string trim [get_line $type $i prevcontinued] " "]
     if {[string index $line 0] eq "\"" && [string index $line end] eq "\""} {
       set line [string range $line 1 end-1]
     }
@@ -392,11 +407,11 @@ proc doctest::init {args} {
   set options(cnt) {}
   foreach line $cnt {
     set foundptn [regexp -nocase -inline \
-      "^\\s*$TEST_COMMAND\\s+SOURCE\\s+" $line]
+      "^\\s*$TEST_COMMAND\\s+DOCTEST\\s+SOURCE\\s+" $line]
     if {[set sl [string length $foundptn]]} {
       set fn [string trim [string range $line $sl-2 end]]
       if {[catch {set ch [open $fn]}]} {
-        error "PWD: [pwd]\n\"$fn\" not open by $line"
+        exit_on_error "PWD: [pwd]\n\"$fn\" not open by\n $line"
       }
       foreach l [split [read $ch] \n] { lappend options(cnt) $l }
       close $ch

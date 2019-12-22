@@ -63,12 +63,29 @@ So, we place the commands and their results between *doctest quotes*. Let us see
     #> 1st line of result of command4
     #> 2nd line of result of command4
     #> 3rd line of result of command4
+
+    # ... or this way:
+    #% command41
+    #> 1st line of result of command41 \
+       2nd line of result of command41 \
+       3rd line of result of command41
+
+    # ... or this way:
+    #% command42
+    #> "  1st line of result of command42 with initial spaces" \
+       "   2nd line of result of command42 with initial spaces" \
+       "    3rd line of result of command42 with initial spaces"
   
-    ############ command may be continued with "\" as its last character.
+    ############ command may be continued with "\" as its last character
     #% command-so-loooooong - begin \
     #% command-so-loooooong - cont. \
-    #% command-so-loooooong - cont. \
     #% command-so-loooooong - end
+    #> result of command-so-loooooong
+  
+    # ... or this way:
+    #% command-so-loooooong - begin \
+       command-so-loooooong - cont. \
+       command-so-loooooong - end
     #> result of command-so-loooooong
   
     #> doctest
@@ -114,10 +131,14 @@ The following two tests are identical and both return the empty string:
 
 The absence of resulting *#>* means that a result isn't important (e.g. for GUI tests) and no messages are displayed in non-verbose doctest.
 
-At that, when "exec" is used the "&" might be fit at the end of command:
+At that, when "exec" is used the "&" might be fit at the end of command ("|" marks editor's frame):
 
-    #% exec wish ./GUImodule.tcl arg1 arg2 &
-    # ------ no result is waited here ------
+    |  #% doctest
+    |  #% exec wish ./GUImodule.tcl arg1 arg2 "arg 3" &
+    |  # ------ no result is waited here ------
+    |  #> doctest
+
+See e.g. *pavecli.tlc* in [pave](https://github.com/aplsimple/pave).
 
 Of course, "exec" and similar commands need executing the doctest in unsafe interpreter (see "Usage" below).
 
@@ -129,13 +150,17 @@ Run the doctest on this text to see how it works.
 
 This thing might be helpful, namely: the doctest's usage isn't restricted with a code. A data file allowing #- or multi-line comments, might include the doctest strings for testing its contents, e.g. through something like:
 
-    #% exec tclsh module.tcl this_datafile.txt
+    |  #% doctest
+    |  #% exec tclsh module.tcl this_datafile.txt
+    |  #> doctest
 
 If a doctest body is large, it can be moved to a separate file to be sourced with a comment:
 
-    #% source testedfile.test
+    |  #% doctest source testedfile.test
 
-where *source* may be of any case (Source, SOURCE etc.), *testedfile.test* contains the doctest body. Thus we don't clutter the code with the doctest body. See e.g. *obbit.tcl* and *tests/obbit_1.test* in [pave](https://github.com/aplsimple/pave).
+where *doctest source* may be of any case (Doctest Source, DOCTEST SOURCE etc.), *testedfile.test* contains the doctest body. Thus we don't clutter the code with the doctest body.
+
+See e.g. *obbit.tcl* and its sourced *tests/obbit_1.test* in [pave](https://github.com/aplsimple/pave).
 
 
 # Usage
