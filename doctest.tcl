@@ -293,7 +293,7 @@ proc doctest::execute_and_check {block safe commands results} {
 ###################################################################
 # Test block of commands and their results
 
-proc doctest::test_block {begin end blk safe verbose} {
+proc doctest::do_block {begin end blk safe verbose} {
 
   variable UNDER
   variable options
@@ -336,7 +336,7 @@ proc doctest::test_block {begin end blk safe verbose} {
   return $block_ok
 }
 
-proc doctest::test_blocks {blocks safe verbose} {
+proc doctest::do_test {blocks safe verbose} {
 
   variable HINT1
   variable UNDER
@@ -344,7 +344,7 @@ proc doctest::test_blocks {blocks safe verbose} {
   set all_ok -1
   set ptested [set ntested [set ntestedany 0]]
   foreach {begin end blk} $blocks {
-    set block_ok [test_block $begin $end $blk $safe $verbose]
+    set block_ok [do_block $begin $end $blk $safe $verbose]
     if {$block_ok!=-1} {
       if {$block_ok} {
         incr ptested
@@ -434,7 +434,7 @@ proc doctest::do {} {
   variable options
   lassign [get_test_blocks] error blocks
   switch $error {
-    0 { test_blocks $blocks $options(-s) $options(-v)}
+    0 { do_test $blocks $options(-s) $options(-v)}
     1 { ERR "Unpaired: $TEST_BEGIN$HINT1" }
     2 { ERR "Unpaired: $TEST_END$HINT1" }
   }
