@@ -42,21 +42,21 @@ The commands of `... (tested code) ...` are marked with *#%* and are followed wi
 So, we place the commands and their results between *doctest quotes*. Let us see how to do it:
 
     #% doctest (put here any title/name/number/comment)
-  
+
     ############ here we have two commands and their waited results
     ############ (note how a command/result begins and ends)
     #% command1
     #> result of command1
     #% command2
     #> result of command2
-  
+
     ############ command33 needs command31, command32 to be run before
     ############ (their results are ignored if not raising exceptions):
     #% command31
     #% command32
     #% command33
     #> result of command33
-  
+
     ############ command4 returns a multiline result
     ############ (in particular, you should use this when the test raises
     ############ an exception so that you copy-paste it as the waited result)
@@ -76,19 +76,19 @@ So, we place the commands and their results between *doctest quotes*. Let us see
     #> "  1st line of result of command42 with initial spaces" \
        "   2nd line of result of command42 with initial spaces" \
        "    3rd line of result of command42 with initial spaces"
-  
+
     ############ command may be continued with "\" as its last character
     #% command-so-loooooong - begin \
     #% command-so-loooooong - cont. \
     #% command-so-loooooong - end
     #> result of command-so-loooooong
-  
+
     # ... or this way:
     #% command-so-loooooong - begin \
        command-so-loooooong - cont. \
        command-so-loooooong - end
     #> result of command-so-loooooong
-  
+
     #> doctest
 
 You can have as many test blocks as you need.
@@ -221,7 +221,7 @@ The absence of resulting *#>* means that a result isn't important (e.g. for GUI 
 
 If a doctest body is large, it can be moved to a separate file to be sourced with a comment:
 
-`    #% doctest source testedfile.test`
+    #% doctest source testedfile.test
 
 where *doctest source* may be of any case (Doctest Source, DOCTEST SOURCE etc.), *testedfile.test* contains the doctest body. Thus a code isn't cluttered with a doctest body. See e.g. *obbit.tcl* and its sourced *tests/obbit_1.test* in [pave](https://github.com/aplsimple/pave).
 
