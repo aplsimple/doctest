@@ -139,7 +139,7 @@ Examples:
 
 TKE presents a good sample how to employ <i>doctest</i> while editing Tcl modules.
 
-[TKE editor](https://sourceforge.net/projects/tke) has its own [doctest plugin](https://sourceforge.net/p/tke/code/ci/default/tree/plugins/doctest) that provides the additional facilities:
+[TKE editor](https://github.com/phase1geo/tke/) has its own [doctest plugin](https://github.com/phase1geo/tke/tree/master/plugins/doctest) that provides the additional facilities:
 
  - doctesting the selected lines of code
  - inserting the doctest template into the code
@@ -147,7 +147,7 @@ TKE presents a good sample how to employ <i>doctest</i> while editing Tcl module
  - message boxes for results
  - hotkeys for all operations
 
-Also, you can run TKE's [e_menu plugin](https://sourceforge.net/p/tke/code/ci/default/tree/plugins/e_menu) and get to <i>doctest</i> by the menu path:
+Also, you can run TKE's [e_menu plugin](https://github.com/phase1geo/tke/tree/master/plugins/e_menu) and get to <i>doctest</i> by the menu path:
 
     Main menu / Utils / Test1
 
@@ -342,7 +342,7 @@ Another example could make you smile:
 
 The doctest pages:
 
->  [code](https://chiselapp.com/user/aplsimple/repository/aplsimple_github_io/uv/doctest.zip)
+>  [code](https://chiselapp.com/user/aplsimple/repository/doctest/download)
 
 >  [description](https://aplsimple.github.io/en/tcl/doctest)
 
@@ -352,7 +352,7 @@ The doctest pages:
 
 See also:
 
-> [TKE editor](https://sourceforge.net/projects/tke/)
+> [TKE editor](https://github.com/phase1geo/tke)
 
 > [Geany IDE](https://www.geany.org)
 
