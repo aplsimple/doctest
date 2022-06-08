@@ -125,6 +125,8 @@ where:
 
 The -b option may be repeated. If -b omitted, all of the file is checked for the doctest blocks to execute.
 
+You can use -DTs, -DTv and -DTb instead of -s, -v and -b accordingly, to avoid intersections with arguments of other scripts.
+
 Examples:
 
     tclsh doctest.tcl ~/PG/projects/pave/paveme.tcl

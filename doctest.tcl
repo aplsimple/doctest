@@ -22,6 +22,9 @@
 #-ARGS9: -v 0 -s 0 /home/apl/TKE-clone/TKE-clone/plugins/e_menu/e_menu/e_menu.tcl
 #ARGS10: -v 1 /home/apl/PG/Tcl-Tk/projects/doctest/README.md
 #
+# With vanilla wish, use -DTs, -DTv, -DTb instead of -s, -v, -b,
+# to avoid intersections with the wish's arguments.
+#
 #########################################################################
 
 namespace eval doctest {
@@ -420,6 +423,8 @@ proc doctest::init {args} {
       append options(fn) " $opt $val"
       continue
     }
+    # use doctest's specific options (avoiding intersections with vanilla wish's)
+    set opt [string map {-DTs -s -DTv -v -DTb -b} $opt]
     switch -glob $opt {
       -s - -v { set options($opt) $val }
       -b      { set options($opt) "$options($opt) [strip_upcase_nn $val] " }
