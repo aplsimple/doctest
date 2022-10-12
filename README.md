@@ -136,6 +136,28 @@ Examples:
     tclsh doctest.tcl -b factorial ~/PG/projects/doctest/README.md
 
 
+# Usage in alited
+
+
+In [alited editor](https://aplsimple.github.io/en/tcl/alited), doctest is implemented by [e_menu](https://aplsimple.github.io/en/tcl/e_menu)'s tools, available in two places:
+
+ - "Tools / bar/menu / tests.mnu: Tests" menu item
+ - "T" tool bar item
+
+When you run those items, you get "Tests" menu containing four doctest's choices:
+
+ - Doctest Safe
+ - Doctest Safe verbose
+ - Doctest
+ - Doctest verbose
+
+Any of them can be applied to a current text. Also, you can select a text snippet and doctest it.
+
+The "List of Templates" of alited allows to put a template of doctest.
+
+The "Tests" menu contains "Help" item to view the docs of doctest.
+
+
 # Usage in TKE
 
 
