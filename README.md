@@ -376,6 +376,8 @@ The doctest pages:
 
 See also:
 
+> [alited editor](https://aplsimple.github.io/en/tcl/alited)
+
 > [TKE editor](https://github.com/phase1geo/tke)
 
 > [Geany IDE](https://www.geany.org)
