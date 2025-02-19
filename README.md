@@ -30,6 +30,9 @@ The features of this doctest:
 The test blocks include the test examples concerning the current script and are *quoted* with the following *doctest-begin* and *doctest-end* Tcl comments:
 
     #% doctest
+    #< initialization command(s)
+    ... (tested code) ...
+    #< debugging command(s)
     ... (tested code) ...
     #> doctest
 
@@ -96,6 +99,8 @@ You can have as many test blocks as you need.
 If there are no *doctest quotes*, all of the text is considered as a giant test block containing *#%* and *#>* lines to be tested.
 
 <b>Note:</b> if there is a *quoted* doctest block, any outside #% and #> lines are ignored.
+
+<b>Note:</b> the tested code can include comments like *#< commands* that will be executed by doctest as *commands*. For example, if a block includes *proc ns::myproc* line and doesn't declare *ns* namespace, set before this line *#< namespace eval ns {}* to declare the ns namespace (for doctesting only!). Also, debugging *#< commands* may be useful at doctesting.
 
 The block is tested OK when all its test cases (*#%* through *#>*) result in OK. The whole doctest is considered OK when all its blocks result in OK.
 

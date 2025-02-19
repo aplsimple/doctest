@@ -140,6 +140,7 @@ proc doctest::get_test_block {begin end} {
   for {set i $begin} {$i<=$end} {incr i} {
     append block [get_line_contents $i] "\n"
   }
+  set block [regsub -all {\n(#<)} $block "\n"]
   return $block
 }
 
